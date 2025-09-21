@@ -7,7 +7,7 @@ export default defineConfig({
     plugins: [
         tailwindcss(),
         inertiacore({
-            input: ["src/App.ts"],
+            input: ["src/app.ts"],
             refresh: true,
         }),
         vue({
