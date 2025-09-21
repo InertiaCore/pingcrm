@@ -79,10 +79,17 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 
 // Initialize database
-using (var scope = app.Services.CreateScope())
+try
 {
-    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    context.Database.EnsureCreated();
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        context.Database.EnsureCreated();
+    }
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Database initialization warning: {ex.Message}");
 }
 
 app.Run();

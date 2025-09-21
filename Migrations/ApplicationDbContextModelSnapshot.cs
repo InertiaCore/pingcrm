@@ -168,9 +168,9 @@ namespace PingCRM.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            CreatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             Name = "Acme Corporation",
-                            UpdatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480)
+                            UpdatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920)
                         });
                 });
 
@@ -251,7 +251,7 @@ namespace PingCRM.Migrations
                             Address = "123 Tech Street",
                             City = "San Francisco",
                             Country = "US",
-                            CreatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            CreatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             Email = "sarah.johnson@techsolutions.com",
                             FirstName = "Sarah",
                             LastName = "Johnson",
@@ -259,7 +259,7 @@ namespace PingCRM.Migrations
                             Phone = "+1 555-0111",
                             PostalCode = "94105",
                             Region = "CA",
-                            UpdatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480)
+                            UpdatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920)
                         },
                         new
                         {
@@ -268,7 +268,7 @@ namespace PingCRM.Migrations
                             Address = "123 Tech Street",
                             City = "San Francisco",
                             Country = "US",
-                            CreatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            CreatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             Email = "michael.chen@techsolutions.com",
                             FirstName = "Michael",
                             LastName = "Chen",
@@ -276,7 +276,7 @@ namespace PingCRM.Migrations
                             Phone = "+1 555-0222",
                             PostalCode = "94105",
                             Region = "CA",
-                            UpdatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480)
+                            UpdatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920)
                         },
                         new
                         {
@@ -285,7 +285,7 @@ namespace PingCRM.Migrations
                             Address = "456 Marketing Avenue",
                             City = "New York",
                             Country = "US",
-                            CreatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            CreatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             Email = "emily.rodriguez@globalmarketing.com",
                             FirstName = "Emily",
                             LastName = "Rodriguez",
@@ -293,7 +293,7 @@ namespace PingCRM.Migrations
                             Phone = "+1 555-0333",
                             PostalCode = "10001",
                             Region = "NY",
-                            UpdatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480)
+                            UpdatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920)
                         },
                         new
                         {
@@ -302,7 +302,7 @@ namespace PingCRM.Migrations
                             Address = "789 Creative Lane",
                             City = "Los Angeles",
                             Country = "US",
-                            CreatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            CreatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             Email = "david.wilson@designstudio.com",
                             FirstName = "David",
                             LastName = "Wilson",
@@ -310,7 +310,7 @@ namespace PingCRM.Migrations
                             Phone = "+1 555-0444",
                             PostalCode = "90210",
                             Region = "CA",
-                            UpdatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480)
+                            UpdatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920)
                         },
                         new
                         {
@@ -319,7 +319,7 @@ namespace PingCRM.Migrations
                             Address = "321 Business Plaza",
                             City = "Chicago",
                             Country = "US",
-                            CreatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            CreatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             Email = "lisa.anderson@consulting.com",
                             FirstName = "Lisa",
                             LastName = "Anderson",
@@ -327,7 +327,7 @@ namespace PingCRM.Migrations
                             Phone = "+1 555-0555",
                             PostalCode = "60601",
                             Region = "IL",
-                            UpdatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480)
+                            UpdatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920)
                         },
                         new
                         {
@@ -336,7 +336,7 @@ namespace PingCRM.Migrations
                             Address = "654 Innovation Drive",
                             City = "Austin",
                             Country = "US",
-                            CreatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            CreatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             Email = "robert.taylor@innovationlabs.com",
                             FirstName = "Robert",
                             LastName = "Taylor",
@@ -344,7 +344,7 @@ namespace PingCRM.Migrations
                             Phone = "+1 555-0666",
                             PostalCode = "73301",
                             Region = "TX",
-                            UpdatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480)
+                            UpdatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920)
                         },
                         new
                         {
@@ -353,14 +353,14 @@ namespace PingCRM.Migrations
                             Address = "987 Independent Way",
                             City = "Seattle",
                             Country = "US",
-                            CreatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            CreatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             Email = "jennifer.brown@freelancer.com",
                             FirstName = "Jennifer",
                             LastName = "Brown",
                             Phone = "+1 555-0777",
                             PostalCode = "98101",
                             Region = "WA",
-                            UpdatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480)
+                            UpdatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920)
                         },
                         new
                         {
@@ -369,14 +369,14 @@ namespace PingCRM.Migrations
                             Address = "147 Solo Street",
                             City = "Denver",
                             Country = "US",
-                            CreatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            CreatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             Email = "james.miller@consultant.com",
                             FirstName = "James",
                             LastName = "Miller",
                             Phone = "+1 555-0888",
                             PostalCode = "80201",
                             Region = "CO",
-                            UpdatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480)
+                            UpdatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920)
                         });
                 });
 
@@ -447,13 +447,13 @@ namespace PingCRM.Migrations
                             Address = "123 Tech Street",
                             City = "San Francisco",
                             Country = "US",
-                            CreatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            CreatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             Email = "info@techsolutions.com",
                             Name = "Tech Solutions Inc",
                             Phone = "+1 555-0123",
                             PostalCode = "94105",
                             Region = "CA",
-                            UpdatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480)
+                            UpdatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920)
                         },
                         new
                         {
@@ -462,13 +462,13 @@ namespace PingCRM.Migrations
                             Address = "456 Marketing Avenue",
                             City = "New York",
                             Country = "US",
-                            CreatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            CreatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             Email = "contact@globalmarketing.com",
                             Name = "Global Marketing Group",
                             Phone = "+1 555-0456",
                             PostalCode = "10001",
                             Region = "NY",
-                            UpdatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480)
+                            UpdatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920)
                         },
                         new
                         {
@@ -477,13 +477,13 @@ namespace PingCRM.Migrations
                             Address = "789 Creative Lane",
                             City = "Los Angeles",
                             Country = "US",
-                            CreatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            CreatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             Email = "hello@designstudio.com",
                             Name = "Design Studio Pro",
                             Phone = "+1 555-0789",
                             PostalCode = "90210",
                             Region = "CA",
-                            UpdatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480)
+                            UpdatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920)
                         },
                         new
                         {
@@ -492,13 +492,13 @@ namespace PingCRM.Migrations
                             Address = "321 Business Plaza",
                             City = "Chicago",
                             Country = "US",
-                            CreatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            CreatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             Email = "info@consulting.com",
                             Name = "Consulting Partners Ltd",
                             Phone = "+1 555-0321",
                             PostalCode = "60601",
                             Region = "IL",
-                            UpdatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480)
+                            UpdatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920)
                         },
                         new
                         {
@@ -507,13 +507,13 @@ namespace PingCRM.Migrations
                             Address = "654 Innovation Drive",
                             City = "Austin",
                             Country = "US",
-                            CreatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            CreatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             Email = "contact@innovationlabs.com",
                             Name = "Innovation Labs",
                             Phone = "+1 555-0654",
                             PostalCode = "73301",
                             Region = "TX",
-                            UpdatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480)
+                            UpdatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920)
                         });
                 });
 
@@ -619,8 +619,8 @@ namespace PingCRM.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             AccountId = 1,
-                            ConcurrencyStamp = "df08e388-579c-415d-ae19-927e769f0138",
-                            CreatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            ConcurrencyStamp = "42895ece-88b6-4d3d-9988-09268e2643be",
+                            CreatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             Email = "johndoe@example.com",
                             EmailConfirmed = true,
                             FirstName = "John",
@@ -629,11 +629,11 @@ namespace PingCRM.Migrations
                             NormalizedEmail = "JOHNDOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE@EXAMPLE.COM",
                             Owner = true,
-                            PasswordHash = "AQAAAAIAAYagAAAAEIouYSPsfPtRXaESr3DfPxhAilghodOqmiW2Cx/JLL7uThg3q1d59h8bWh15jhpGBw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHX8mn9KpQW0LYwv4eoXBlhnigj96588XQmJk7Q9NynzPh5kYUPbKWl0iRrPvgYT6Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "11fa044d-10a8-4c4d-ae57-e57a9a6c7eb9",
+                            SecurityStamp = "4e017e40-531e-4bfd-9746-f2ec5ab998c6",
                             TwoFactorEnabled = false,
-                            UpdatedAt = new DateTime(2025, 9, 21, 3, 12, 3, 104, DateTimeKind.Utc).AddTicks(3480),
+                            UpdatedAt = new DateTime(2025, 9, 21, 3, 14, 49, 780, DateTimeKind.Utc).AddTicks(9920),
                             UserName = "johndoe@example.com"
                         });
                 });
