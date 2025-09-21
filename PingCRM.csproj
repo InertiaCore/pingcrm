@@ -36,12 +36,6 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
-  <!-- Exclude WASM-specific files from regular builds -->
-  <ItemGroup>
-    <Compile Remove="Program.Wasm.cs" />
-    <None Include="Program.Wasm.cs" />
-  </ItemGroup>
-
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build"
     Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') And '$(CI)' != 'true' And '$(DOCKER_BUILD)' != 'true' ">
     <!-- Ensure Node.js is installed -->
