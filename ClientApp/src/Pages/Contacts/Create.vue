@@ -105,20 +105,19 @@ import LoadingButton from '@/Shared/LoadingButton.vue';
 import SelectInput from '@/Shared/SelectInput.vue';
 import TextInput from '@/Shared/TextInput.vue';
 import type {
-    AuthDto,
     ContactViewModel,
-    FlashDto,
+    InertiaSharedProps,
     Organization,
 } from '@/Types/generated';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 // Define page props
-interface Props {
-    auth: AuthDto;
-    flash: FlashDto;
-    organizations: Organization[];
-}
 
+type Props = InertiaSharedProps<{
+  organizations: Organization[];
+}>;
+
+// Important: hand defineProps a **resolved** alias.
 defineProps<Props>();
 
 const form = useForm<ContactViewModel>({

@@ -105,6 +105,13 @@ export interface IdentityUser<TKey extends IEquatable<TKey>> {
 }
 
 
+// Inertia Shared Props
+export type InertiaSharedProps<T = Record<string, unknown>> = T & {
+  auth: AuthDto;
+  flash: FlashDto;
+  [key: string]: unknown;
+};
+
 // Organization View Model
 export interface OrganizationViewModel {
   name: string;
@@ -213,4 +220,3 @@ export interface User extends IdentityUser<number> {
   account: Account;
   name: string;
 }
-
