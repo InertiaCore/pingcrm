@@ -1,6 +1,7 @@
 using InertiaCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
 
 namespace PingCRM.Middleware;
@@ -50,11 +51,19 @@ public class ExceptionMiddleware
 
         context.Response.StatusCode = 500;
 
+        // Clear any existing TempData to prevent serialization issues
+        var tempDataFactory = context.RequestServices.GetService<ITempDataDictionaryFactory>();
+        if (tempDataFactory != null)
+        {
+            var tempData = tempDataFactory.GetTempData(context);
+            tempData.Clear();
+        }
+
         var errorData = new
         {
             message = _env.IsDevelopment()
                 ? exception.Message
-                : "An unexpected error occurred",
+                : "An unexpected error occurred. Please try again later.",
             stackTrace = _env.IsDevelopment() ? exception.StackTrace : null
         };
 
