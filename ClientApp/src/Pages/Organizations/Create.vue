@@ -29,41 +29,41 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/vue3'
 import Layout from '@/Shared/Layout.vue'
 import TextInput from '@/Shared/TextInput.vue'
 import SelectInput from '@/Shared/SelectInput.vue'
 import LoadingButton from '@/Shared/LoadingButton.vue'
+import type { AuthDto, FlashDto, OrganizationViewModel } from '@/Types/generated'
 
-export default {
-  components: {
-    Head,
-    Link,
-    LoadingButton,
-    SelectInput,
-    TextInput,
-  },
-  layout: Layout,
-  remember: 'form',
-  data() {
-    return {
-      form: this.$inertia.form({
-        name: null,
-        email: null,
-        phone: null,
-        address: null,
-        city: null,
-        region: null,
-        country: null,
-        postal_code: null,
-      }),
-    }
-  },
-  methods: {
-    store() {
-      this.form.post('/organizations')
-    },
-  },
+// Define page props
+interface Props {
+  auth: AuthDto
+  flash: FlashDto
 }
+
+defineProps<Props>()
+
+const form = useForm<OrganizationViewModel>({
+  name: '',
+  email: '',
+  phone: '',
+  address: '',
+  city: '',
+  region: '',
+  country: '',
+  postal_code: '',
+})
+
+// Submit function
+const store = () => {
+  form.post('/organizations')
+}
+
+// This component uses Layout as the default layout
+defineOptions({
+  layout: Layout,
+})
 </script>

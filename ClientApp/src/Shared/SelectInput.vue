@@ -8,40 +8,55 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref, watch } from 'vue'
 import { v4 as uuid } from 'uuid'
 
-export default {
-  inheritAttrs: false,
-  props: {
-    id: {
-      type: String,
-      default() {
-        return `select-input-${uuid()}`
-      },
-    },
-    error: String,
-    label: String,
-    modelValue: [String, Number, Boolean],
-  },
-  emits: ['update:modelValue'],
-  data() {
-    return {
-      selected: this.modelValue,
-    }
-  },
-  watch: {
-    selected(selected) {
-      this.$emit('update:modelValue', selected)
-    },
-  },
-  methods: {
-    focus() {
-      this.$refs.input.focus()
-    },
-    select() {
-      this.$refs.input.select()
-    },
-  },
+// Define props with types
+interface Props {
+  id?: string
+  error?: string
+  label?: string
+  modelValue?: string | number | boolean | null
 }
+
+const props = withDefaults(defineProps<Props>(), {
+  id: () => `select-input-${uuid()}`
+})
+
+// Define emits
+const emit = defineEmits<{
+  'update:modelValue': [value: string | number | boolean | null]
+}>()
+
+// Template ref
+const input = ref<HTMLSelectElement>()
+
+// Reactive state
+const selected = ref(props.modelValue)
+
+// Watch for changes and emit
+watch(selected, (newValue) => {
+  emit('update:modelValue', newValue)
+}, { immediate: false })
+
+// Watch props.modelValue to update selected when parent changes
+watch(() => props.modelValue, (newValue) => {
+  selected.value = newValue
+})
+
+// Methods
+const focus = () => {
+  input.value?.focus()
+}
+
+const select = () => {
+  input.value?.select()
+}
+
+// Export methods for external access
+defineExpose({
+  focus,
+  select
+})
 </script>

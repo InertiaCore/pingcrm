@@ -37,59 +37,58 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3'
+import { useForm, router } from '@inertiajs/vue3'
 import Layout from '@/Shared/Layout.vue'
 import TextInput from '@/Shared/TextInput.vue'
 import SelectInput from '@/Shared/SelectInput.vue'
 import LoadingButton from '@/Shared/LoadingButton.vue'
 import TrashedMessage from '@/Shared/TrashedMessage.vue'
+import type { Contact, Organization, AuthDto, FlashDto, ContactViewModel } from '@/Types/generated'
 
-export default {
-  components: {
-    Head,
-    Link,
-    LoadingButton,
-    SelectInput,
-    TextInput,
-    TrashedMessage,
-  },
-  layout: Layout,
-  props: {
-    contact: Object,
-    organizations: Array,
-  },
-  remember: 'form',
-  data() {
-    return {
-      form: this.$inertia.form({
-        first_name: this.contact.first_name,
-        last_name: this.contact.last_name,
-        organization_id: this.contact.organization_id,
-        email: this.contact.email,
-        phone: this.contact.phone,
-        address: this.contact.address,
-        city: this.contact.city,
-        region: this.contact.region,
-        country: this.contact.country,
-        postal_code: this.contact.postal_code,
-      }),
-    }
-  },
-  methods: {
-    update() {
-      this.form.put(`/contacts/${this.contact.id}`)
-    },
-    destroy() {
-      if (confirm('Are you sure you want to delete this contact?')) {
-        this.$inertia.delete(`/contacts/${this.contact.id}`)
-      }
-    },
-    restore() {
-      if (confirm('Are you sure you want to restore this contact?')) {
-        this.$inertia.put(`/contacts/${this.contact.id}/restore`)
-      }
-    },
-  },
+// Define page props
+interface Props {
+  auth: AuthDto
+  flash: FlashDto
+  contact: Contact
+  organizations: Organization[]
 }
+
+const props = defineProps<Props>()
+
+const form = useForm<ContactViewModel>({
+  first_name: props.contact.first_name,
+  last_name: props.contact.last_name,
+  organization_id: props.contact.organization_id,
+  email: props.contact.email,
+  phone: props.contact.phone,
+  address: props.contact.address,
+  city: props.contact.city,
+  region: props.contact.region,
+  country: props.contact.country,
+  postal_code: props.contact.postal_code,
+})
+
+// Methods
+const update = () => {
+  form.put(`/contacts/${props.contact.id}`)
+}
+
+const destroy = () => {
+  if (confirm('Are you sure you want to delete this contact?')) {
+    router.delete(`/contacts/${props.contact.id}`)
+  }
+}
+
+const restore = () => {
+  if (confirm('Are you sure you want to restore this contact?')) {
+    router.put(`/contacts/${props.contact.id}/restore`)
+  }
+}
+
+// This component uses Layout as the default layout
+defineOptions({
+  layout: Layout,
+})
 </script>

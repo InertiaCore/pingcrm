@@ -5,10 +5,11 @@
   </button>
 </template>
 
-<script>
-export default {
-  props: {
-    loading: Boolean,
-  },
+<script setup lang="ts">
+// Define props with types
+interface Props {
+  loading?: boolean
 }
+
+defineProps<Props>()
 </script>

@@ -18,7 +18,8 @@
             ],
         },
         "types": [
-            "vite/client"
+            "vite/client",
+            "@vue/runtime-core"
         ]
     }
 }

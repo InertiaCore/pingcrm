@@ -5,14 +5,21 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { Head } from '@inertiajs/vue3'
 import Layout from '@/Shared/Layout.vue'
+import type { AuthDto, FlashDto } from '@/Types/generated'
 
-export default {
-  components: {
-    Head,
-  },
-  layout: Layout,
+// Define page props
+interface Props {
+  auth: AuthDto
+  flash: FlashDto
 }
+
+defineProps<Props>()
+
+// This component uses Layout as the default layout
+defineOptions({
+  layout: Layout,
+})
 </script>

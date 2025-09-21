@@ -12,52 +12,65 @@
   </button>
 </template>
 
-<script>
-import { createPopper } from '@popperjs/core'
+<script setup lang="ts">
+import { ref, watch, nextTick, onMounted, onUnmounted, getCurrentInstance } from 'vue'
+import { createPopper, type Instance } from '@popperjs/core'
+import type { DropdownProps } from './types'
 
-export default {
-  props: {
-    placement: {
-      type: String,
-      default: 'bottom-end',
-    },
-    autoClose: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  data() {
-    return {
-      show: false,
-    }
-  },
-  watch: {
-    show(show) {
-      if (show) {
-        this.$nextTick(() => {
-          this.popper = createPopper(this.$el, this.$refs.dropdown, {
-            placement: this.placement,
-            modifiers: [
-              {
-                name: 'preventOverflow',
-                options: {
-                  altBoundary: true,
-                },
+const props = withDefaults(defineProps<DropdownProps>(), {
+  placement: 'bottom-end',
+  autoClose: true
+})
+
+// Reactive state
+const show = ref(false)
+const dropdown = ref<HTMLElement>()
+let popper: Instance | null = null
+
+// Get current instance for $el access
+const instance = getCurrentInstance()
+
+// Watch show state to manage popper
+watch(show, (newShow) => {
+  if (newShow) {
+    nextTick(() => {
+      if (instance?.proxy?.$el && dropdown.value) {
+        popper = createPopper(instance.proxy.$el, dropdown.value, {
+          placement: props.placement,
+          modifiers: [
+            {
+              name: 'preventOverflow',
+              options: {
+                altBoundary: true,
               },
-            ],
-          })
+            },
+          ],
         })
-      } else if (this.popper) {
-        setTimeout(() => this.popper.destroy(), 100)
-      }
-    },
-  },
-  mounted() {
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        this.show = false
       }
     })
-  },
+  } else if (popper) {
+    setTimeout(() => {
+      popper?.destroy()
+      popper = null
+    }, 100)
+  }
+})
+
+// Handle escape key
+const handleKeydown = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') {
+    show.value = false
+  }
 }
+
+onMounted(() => {
+  document.addEventListener('keydown', handleKeydown)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleKeydown)
+  if (popper) {
+    popper.destroy()
+  }
+})
 </script>

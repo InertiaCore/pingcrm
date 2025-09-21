@@ -22,14 +22,8 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import Logo from '@/Shared/Logo.vue'
-
-export default {
-  components: {
-    Logo,
-  },
-}
 </script>
 
 <style scoped>

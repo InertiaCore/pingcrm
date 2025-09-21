@@ -114,33 +114,34 @@
   </component>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { Link } from '@inertiajs/vue3'
+import { computed } from 'vue'
 import Layout from '@/Shared/Layout.vue'
 import GuestLayout from '@/Shared/GuestLayout.vue'
+import type { AuthDto } from '@/Types/generated'
 
-export default {
-  components: {
-    InertiaLink: Link,
-    Layout,
-    GuestLayout,
-  },
-  props: {
-    auth: Object,
-  },
-  computed: {
-    currentLayout() {
-      return this.auth?.user ? 'Layout' : 'GuestLayout'
-    }
-  },
-  methods: {
-    goBack() {
-      if (window.history.length > 1) {
-        window.history.back()
-      } else {
-        window.location.href = '/'
-      }
-    }
+// Alias for template
+const InertiaLink = Link
+
+// Define page props
+interface Props {
+  auth?: AuthDto
+}
+
+const props = defineProps<Props>()
+
+// Computed layout
+const currentLayout = computed(() => {
+  return props.auth?.user ? Layout : GuestLayout
+})
+
+// Methods
+const goBack = () => {
+  if (window.history.length > 1) {
+    window.history.back()
+  } else {
+    window.location.href = '/'
   }
 }
 </script>

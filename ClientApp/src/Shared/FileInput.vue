@@ -17,39 +17,53 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    modelValue: File,
-    label: String,
-    accept: String,
-    errors: {
-      type: Array,
-      default: () => [],
-    },
-  },
-  emits: ['update:modelValue'],
-  watch: {
-    modelValue(value) {
-      if (!value) {
-        this.$refs.file.value = ''
-      }
-    },
-  },
-  methods: {
-    filesize(size) {
-      var i = Math.floor(Math.log(size) / Math.log(1024))
-      return (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i]
-    },
-    browse() {
-      this.$refs.file.click()
-    },
-    change(e) {
-      this.$emit('update:modelValue', e.target.files[0])
-    },
-    remove() {
-      this.$emit('update:modelValue', null)
-    },
-  },
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+
+// Define props with types
+interface Props {
+  modelValue?: File | null
+  label?: string
+  accept?: string
+  errors?: string[]
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  errors: () => []
+})
+
+// Define emits
+const emit = defineEmits<{
+  'update:modelValue': [value: File | null]
+}>()
+
+// Template ref
+const file = ref<HTMLInputElement>()
+
+// Watch modelValue to clear input when null
+watch(() => props.modelValue, (value) => {
+  if (!value && file.value) {
+    file.value.value = ''
+  }
+})
+
+// Methods
+const filesize = (size: number): string => {
+  const i = Math.floor(Math.log(size) / Math.log(1024))
+  return (size / Math.pow(1024, i)).toFixed(2) as any * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i]
+}
+
+const browse = () => {
+  file.value?.click()
+}
+
+const change = (e: Event) => {
+  const target = e.target as HTMLInputElement
+  const selectedFile = target.files?.[0] || null
+  emit('update:modelValue', selectedFile)
+}
+
+const remove = () => {
+  emit('update:modelValue', null)
 }
 </script>

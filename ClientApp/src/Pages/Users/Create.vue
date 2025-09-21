@@ -26,41 +26,40 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/vue3'
 import Layout from '@/Shared/Layout.vue'
 import FileInput from '@/Shared/FileInput.vue'
 import TextInput from '@/Shared/TextInput.vue'
 import SelectInput from '@/Shared/SelectInput.vue'
 import LoadingButton from '@/Shared/LoadingButton.vue'
+import type { AuthDto, FlashDto, CreateUserForm } from '@/Types/generated'
 
-export default {
-  components: {
-    FileInput,
-    Head,
-    Link,
-    LoadingButton,
-    SelectInput,
-    TextInput,
-  },
-  layout: Layout,
-  remember: 'form',
-  data() {
-    return {
-      form: this.$inertia.form({
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: '',
-        owner: false,
-        photo: null,
-      }),
-    }
-  },
-  methods: {
-    store() {
-      this.form.post('/users')
-    },
-  },
+// Define page props (Vue SFC compiler works better with explicit interfaces)
+interface Props {
+  auth: AuthDto
+  flash: FlashDto
 }
+
+defineProps<Props>()
+
+const form = useForm<CreateUserForm>({
+  first_name: '',
+  last_name: '',
+  email: '',
+  password: '',
+  owner: false,
+  photo: null,
+})
+
+// Submit function
+const store = () => {
+  form.post('/users')
+}
+
+// This component uses Layout as the default layout
+defineOptions({
+  layout: Layout,
+})
 </script>

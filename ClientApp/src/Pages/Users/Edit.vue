@@ -32,59 +32,68 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3'
+import { useForm, router } from '@inertiajs/vue3'
 import Layout from '@/Shared/Layout.vue'
 import TextInput from '@/Shared/TextInput.vue'
 import FileInput from '@/Shared/FileInput.vue'
 import SelectInput from '@/Shared/SelectInput.vue'
 import LoadingButton from '@/Shared/LoadingButton.vue'
 import TrashedMessage from '@/Shared/TrashedMessage.vue'
+import type { User, AuthDto, FlashDto } from '@/Types/generated'
 
-export default {
-  components: {
-    FileInput,
-    Head,
-    Link,
-    LoadingButton,
-    SelectInput,
-    TextInput,
-    TrashedMessage,
-  },
-  layout: Layout,
-  props: {
-    user: Object,
-  },
-  remember: 'form',
-  data() {
-    return {
-      form: this.$inertia.form({
-        _method: 'put',
-        first_name: this.user.first_name,
-        last_name: this.user.last_name,
-        email: this.user.email,
-        password: '',
-        owner: this.user.owner,
-        photo: null,
-      }),
-    }
-  },
-  methods: {
-    update() {
-      this.form.post(`/users/${this.user.id}`, {
-        onSuccess: () => this.form.reset('password', 'photo'),
-      })
-    },
-    destroy() {
-      if (confirm('Are you sure you want to delete this user?')) {
-        this.$inertia.delete(`/users/${this.user.id}`)
-      }
-    },
-    restore() {
-      if (confirm('Are you sure you want to restore this user?')) {
-        this.$inertia.put(`/users/${this.user.id}/restore`)
-      }
-    },
-  },
+// Define page props
+interface Props {
+  auth: AuthDto
+  flash: FlashDto
+  user: User
 }
+
+const props = defineProps<Props>()
+
+// Define form interface
+interface UpdateUserForm {
+  _method: string
+  first_name: string
+  last_name: string
+  email: string
+  password: string
+  owner: boolean
+  photo: File | null
+}
+
+const form = useForm<UpdateUserForm>({
+  _method: 'put',
+  first_name: props.user.first_name,
+  last_name: props.user.last_name,
+  email: props.user.email,
+  password: '',
+  owner: props.user.owner,
+  photo: null,
+})
+
+// Methods
+const update = () => {
+  form.post(`/users/${props.user.id}`, {
+    onSuccess: () => form.reset('password', 'photo'),
+  })
+}
+
+const destroy = () => {
+  if (confirm('Are you sure you want to delete this user?')) {
+    router.delete(`/users/${props.user.id}`)
+  }
+}
+
+const restore = () => {
+  if (confirm('Are you sure you want to restore this user?')) {
+    router.put(`/users/${props.user.id}/restore`)
+  }
+}
+
+// This component uses Layout as the default layout
+defineOptions({
+  layout: Layout,
+})
 </script>

@@ -34,46 +34,44 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/vue3'
 import Layout from '@/Shared/Layout.vue'
 import TextInput from '@/Shared/TextInput.vue'
 import SelectInput from '@/Shared/SelectInput.vue'
 import LoadingButton from '@/Shared/LoadingButton.vue'
+import type { Organization, AuthDto, FlashDto, ContactViewModel } from '@/Types/generated'
 
-export default {
-  components: {
-    Head,
-    Link,
-    LoadingButton,
-    SelectInput,
-    TextInput,
-  },
-  layout: Layout,
-  props: {
-    organizations: Array,
-  },
-  remember: 'form',
-  data() {
-    return {
-      form: this.$inertia.form({
-        first_name: '',
-        last_name: '',
-        organization_id: null,
-        email: '',
-        phone: '',
-        address: '',
-        city: '',
-        region: '',
-        country: '',
-        postal_code: '',
-      }),
-    }
-  },
-  methods: {
-    store() {
-      this.form.post('/contacts')
-    },
-  },
+// Define page props
+interface Props {
+  auth: AuthDto
+  flash: FlashDto
+  organizations: Organization[]
 }
+
+defineProps<Props>()
+
+const form = useForm<ContactViewModel>({
+  first_name: '',
+  last_name: '',
+  organization_id: 0,
+  email: '',
+  phone: '',
+  address: '',
+  city: '',
+  region: '',
+  country: '',
+  postal_code: '',
+})
+
+// Submit function
+const store = () => {
+  form.post('/contacts')
+}
+
+// This component uses Layout as the default layout
+defineOptions({
+  layout: Layout,
+})
 </script>

@@ -63,8 +63,10 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3'
+import { reactive, watch } from 'vue'
+import { router } from '@inertiajs/vue3'
 import Icon from '@/Shared/Icon.vue'
 import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout.vue'
@@ -72,40 +74,40 @@ import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination.vue'
 import SearchFilter from '@/Shared/SearchFilter.vue'
+import type { Contact, AuthDto, FlashDto, PaginatedData, SearchFilters } from '@/Types/generated'
 
-export default {
-  components: {
-    Head,
-    Icon,
-    Link,
-    Pagination,
-    SearchFilter,
-  },
-  layout: Layout,
-  props: {
-    filters: Object,
-    contacts: Object,
-  },
-  data() {
-    return {
-      form: {
-        search: this.filters.search,
-        trashed: this.filters.trashed,
-      },
-    }
-  },
-  watch: {
-    form: {
-      deep: true,
-      handler: throttle(function () {
-        this.$inertia.get('/contacts', pickBy(this.form), { preserveState: true })
-      }, 150),
-    },
-  },
-  methods: {
-    reset() {
-      this.form = mapValues(this.form, () => null)
-    },
-  },
+// Define page props
+interface Props {
+  auth: AuthDto
+  flash: FlashDto
+  filters: SearchFilters
+  contacts: PaginatedData<Contact>
 }
+
+const props = defineProps<Props>()
+
+// Reactive form state
+const form = reactive<SearchFilters>({
+  search: props.filters.search,
+  trashed: props.filters.trashed,
+})
+
+// Watch form changes with throttling
+watch(
+  form,
+  throttle(() => {
+    router.get('/contacts', pickBy(form), { preserveState: true })
+  }, 150),
+  { deep: true }
+)
+
+// Reset form function
+const reset = () => {
+  Object.assign(form, mapValues(form, () => null))
+}
+
+// This component uses Layout as the default layout
+defineOptions({
+  layout: Layout,
+})
 </script>
