@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using TypeGen.Core.TypeAnnotations;
 
 namespace PingCRM.Models
 {
+    [ExportTsClass]
     public class Account
     {
         public int Id { get; set; }

@@ -1,0 +1,21 @@
+{
+  "assemblies": [
+    "bin/Debug/net8.0/PingCRM.dll"
+  ],
+  "outputPath": "ClientApp/src/Types/",
+  "outputExtension": ".d.ts",
+  "createIndexFile": false,
+  "singleFileName": "index.d.ts",
+  "classStyle": "interface",
+  "fileNameConvention": "camelCase",
+  "enumStringInitializers": true,
+  "explicitPublicAccessor": false,
+  "singleQuotes": true,
+  "typeNameConvention": "pascalCase",
+  "propertyNameConvention": "camelCase",
+  "enumNameConvention": "pascalCase",
+  "enumValueNameConvention": "pascalCase",
+  "tabLength": 2,
+  "useTabCharacter": false,
+  "externalAssemblyPaths": []
+}

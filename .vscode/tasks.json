@@ -32,5 +32,18 @@
                 "cwd": "${workspaceFolder}/ClientApp"
             }
         },
+        {
+            "label": "Generate TypeScript Types",
+            "type": "shell",
+            "command": "dotnet build && dotnet-typegen generate && node scripts/combine-types.js",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
     ]
 }

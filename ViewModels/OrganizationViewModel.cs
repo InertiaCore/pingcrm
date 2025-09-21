@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using TypeGen.Core.TypeAnnotations;
 
 namespace PingCRM.ViewModels
 {
+    [ExportTsClass]
     public class OrganizationViewModel
     {
         [Required]

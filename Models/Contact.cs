@@ -1,7 +1,9 @@
 using System;
+using TypeGen.Core.TypeAnnotations;
 
 namespace PingCRM.Models
 {
+    [ExportTsClass]
     public class Contact
     {
         public int Id { get; set; }

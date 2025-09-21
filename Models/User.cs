@@ -1,8 +1,10 @@
 using System;
 using Microsoft.AspNetCore.Identity;
+using TypeGen.Core.TypeAnnotations;
 
 namespace PingCRM.Models
 {
+    [ExportTsClass]
     public class User : IdentityUser<int>
     {
         public required string FirstName { get; set; }

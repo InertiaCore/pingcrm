@@ -1,8 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
+using TypeGen.Core.TypeAnnotations;
 
 namespace PingCRM.ViewModels
 {
+    [ExportTsClass]
     public class UserViewModel
     {
         [Required]
@@ -23,6 +25,8 @@ namespace PingCRM.ViewModels
         [Required]
         public bool Owner { get; set; }
 
+        // Note: File uploads handled separately on frontend via FormData/File API
+        [TsIgnore]
         public IFormFile? Photo { get; set; }
     }
 }

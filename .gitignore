@@ -238,5 +238,3 @@ _Pvt_Extensions
 *.db*
 wasm-output/
 
-# TypeGen configuration (one-time use)
-tgconfig.json
