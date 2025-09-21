@@ -8,7 +8,8 @@ on:
 
 env:
   DOTNET_VERSION: '8.0.x'
-  NODE_VERSION: '20.x'
+  NODE_VERSION: '24.x'
+  CI: true
 
 jobs:
   build-and-deploy:
@@ -38,10 +39,11 @@ jobs:
 
     - name: Install npm dependencies
       run: npm ci
+      working-directory: ./ClientApp
 
     - name: Build frontend assets
       run: npm run build
-
+      working-directory: ./ClientApp
     - name: Build .NET application
       run: dotnet build --configuration Release --no-restore
 
