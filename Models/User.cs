@@ -5,8 +5,8 @@ namespace PingCRM.Models
 {
     public class User : IdentityUser<int>
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public required string FirstName { get; set; }
+        public required string LastName { get; set; }
         public bool Owner { get; set; }
         public string? PhotoPath { get; set; }
         public int? AccountId { get; set; }

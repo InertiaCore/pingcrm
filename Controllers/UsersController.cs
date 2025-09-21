@@ -33,9 +33,13 @@ namespace PingCRM.Controllers
 
         [HttpGet]
         [Route("users")]
-        public async Task<IActionResult> Index(string search, string role, string trashed)
+        public async Task<IActionResult> Index(string? search, string? role, string? trashed)
         {
             var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser?.AccountId == null)
+            {
+                return Unauthorized();
+            }
 
             var query = _context.Users
                 .Where(u => u.AccountId == currentUser.AccountId);
@@ -43,9 +47,9 @@ namespace PingCRM.Controllers
             if (!string.IsNullOrEmpty(search))
             {
                 query = query.Where(u =>
-                    u.FirstName.Contains(search) ||
-                    u.LastName.Contains(search) ||
-                    u.Email.Contains(search));
+                    (u.FirstName ?? "").Contains(search) ||
+                    (u.LastName ?? "").Contains(search) ||
+                    (u.Email ?? "").Contains(search));
             }
 
             if (!string.IsNullOrEmpty(role))
@@ -109,10 +113,14 @@ namespace PingCRM.Controllers
             }
 
             var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser?.AccountId == null)
+            {
+                return Unauthorized();
+            }
 
             var user = new User
             {
-                AccountId = currentUser.AccountId,
+                AccountId = currentUser.AccountId.Value,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
@@ -265,7 +273,11 @@ namespace PingCRM.Controllers
             var fileName = $"{Guid.NewGuid()}{System.IO.Path.GetExtension(photo.FileName)}";
             var filePath = System.IO.Path.Combine(_environment.WebRootPath, "uploads", "users", fileName);
 
-            System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(filePath));
+            var directoryPath = System.IO.Path.GetDirectoryName(filePath);
+            if (!string.IsNullOrEmpty(directoryPath))
+            {
+                System.IO.Directory.CreateDirectory(directoryPath);
+            }
 
             using (var stream = new System.IO.FileStream(filePath, System.IO.FileMode.Create))
             {

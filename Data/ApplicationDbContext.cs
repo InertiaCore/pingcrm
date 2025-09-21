@@ -108,7 +108,7 @@ namespace PingCRM.Data
                     NormalizedUserName = "JOHNDOE@EXAMPLE.COM",
                     NormalizedEmail = "JOHNDOE@EXAMPLE.COM",
                     EmailConfirmed = true,
-                    PasswordHash = hasher.HashPassword(null, "secret"),
+                    PasswordHash = hasher.HashPassword(new User { FirstName = "", LastName = "" }, "secret"),
                     SecurityStamp = Guid.NewGuid().ToString(),
                     Owner = true,
                     CreatedAt = now,

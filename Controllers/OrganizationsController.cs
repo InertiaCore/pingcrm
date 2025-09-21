@@ -27,9 +27,13 @@ namespace PingCRM.Controllers
 
         [HttpGet]
         [Route("organizations")]
-        public async Task<IActionResult> Index(string search, string trashed, int page = 1)
+        public async Task<IActionResult> Index(string? search, string? trashed, int page = 1)
         {
             var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser?.AccountId == null)
+            {
+                return Unauthorized();
+            }
             const int pageSize = 10;
 
             var query = _context.Organizations
@@ -92,6 +96,10 @@ namespace PingCRM.Controllers
             }
 
             var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser?.AccountId == null)
+            {
+                return Unauthorized();
+            }
 
             var organization = new Organization
             {
@@ -142,7 +150,7 @@ namespace PingCRM.Controllers
                     organization.Country,
                     PostalCode = organization.PostalCode,
                     DeletedAt = organization.DeletedAt,
-                    Contacts = organization.Contacts
+                    Contacts = organization.Contacts?
                         .OrderBy(c => c.LastName)
                         .ThenBy(c => c.FirstName)
                         .Select(c => new

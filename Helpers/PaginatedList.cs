@@ -14,7 +14,7 @@ namespace PingCRM.Helpers
         public int From { get; }
         public int To { get; }
 
-        public PaginatedList(IEnumerable<T> data, int total, int currentPage, int perPage, string path = null)
+        public PaginatedList(IEnumerable<T> data, int total, int currentPage, int perPage, string? path = null)
         {
             Data = data;
             Total = total;

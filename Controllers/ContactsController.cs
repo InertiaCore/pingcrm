@@ -27,9 +27,13 @@ namespace PingCRM.Controllers
 
         [HttpGet]
         [Route("contacts")]
-        public async Task<IActionResult> Index(string search, string trashed, int page = 1)
+        public async Task<IActionResult> Index(string? search, string? trashed, int page = 1)
         {
             var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser?.AccountId == null)
+            {
+                return Unauthorized();
+            }
             const int pageSize = 10;
 
             var query = _context.Contacts
@@ -39,10 +43,10 @@ namespace PingCRM.Controllers
             if (!string.IsNullOrEmpty(search))
             {
                 query = query.Where(c =>
-                    c.FirstName.Contains(search) ||
-                    c.LastName.Contains(search) ||
-                    c.Email.Contains(search) ||
-                    (c.Organization != null && c.Organization.Name.Contains(search)));
+                    (c.FirstName ?? "").Contains(search) ||
+                    (c.LastName ?? "").Contains(search) ||
+                    (c.Email ?? "").Contains(search) ||
+                    (c.Organization != null && (c.Organization.Name ?? "").Contains(search)));
             }
 
             if (!string.IsNullOrEmpty(trashed))
@@ -86,6 +90,10 @@ namespace PingCRM.Controllers
         public async Task<IActionResult> Create()
         {
             var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser?.AccountId == null)
+            {
+                return Unauthorized();
+            }
 
             var organizations = await _context.Organizations
                 .Where(o => o.AccountId == currentUser.AccountId && o.DeletedAt == null)
@@ -110,6 +118,10 @@ namespace PingCRM.Controllers
             }
 
             var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser?.AccountId == null)
+            {
+                return Unauthorized();
+            }
 
             var contact = new Contact
             {
@@ -147,6 +159,10 @@ namespace PingCRM.Controllers
             }
 
             var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser?.AccountId == null)
+            {
+                return Unauthorized();
+            }
 
             var organizations = await _context.Organizations
                 .Where(o => o.AccountId == currentUser.AccountId && o.DeletedAt == null)

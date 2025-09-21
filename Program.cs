@@ -7,6 +7,9 @@ using PingCRM.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure logging to suppress HTTPS development certificate warnings
+builder.Logging.AddFilter("Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer", LogLevel.Error);
+
 // Add database context
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));

@@ -25,7 +25,7 @@ namespace PingCRM.Controllers.Auth
         [Route("login")]
         public IActionResult Create()
         {
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity?.IsAuthenticated == true)
             {
                 return RedirectToAction("Index", "Dashboard");
             }
@@ -82,8 +82,8 @@ namespace PingCRM.Controllers.Auth
 
     public class LoginRequest
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public required string Email { get; set; }
+        public required string Password { get; set; }
         public bool Remember { get; set; }
     }
 }
