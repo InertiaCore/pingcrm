@@ -48,6 +48,75 @@ You're ready to go! Visit Ping CRM in your browser, and login with:
 - **Username:** johndoe@example.com
 - **Password:** secret
 
+## Running with Docker
+
+You can also run the application using Docker Compose:
+
+```sh
+# Clone the repository
+git clone https://github.com/inertiacore/pingcrm.git pingcrm
+cd pingcrm
+
+# Run with Docker Compose
+docker compose up -d
+```
+
+Create a `compose.yml` file in the project root:
+
+```yaml
+services:
+  pingcrm:
+    image: ghcr.io/inertiacore/pingcrm:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - Database__Provider=Sqlite
+      - Database__ConnectionStrings__Sqlite=Data Source=/app/data/pingcrm.db
+    volumes:
+      - pingcrm_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  pingcrm_data:
+```
+
+**Alternative with PostgreSQL:**
+
+```yaml
+version: "3.8"
+
+services:
+  pingcrm:
+    image: ghcr.io/inertiacore/pingcrm:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - Database__Provider=PostgreSQL
+      - Database__ConnectionStrings__PostgreSQL=Host=postgres;Database=pingcrm;Username=pingcrm;Password=pingcrm_password
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=pingcrm
+      - POSTGRES_USER=pingcrm
+      - POSTGRES_PASSWORD=pingcrm_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+```
+
+The application will be available at http://localhost:8080
+
 ## Running tests
 
 To run the Ping CRM tests, run:
