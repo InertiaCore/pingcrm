@@ -97,8 +97,7 @@ import Layout from '@/Shared/Layout.vue';
 import Pagination from '@/Shared/Pagination.vue';
 import SearchFilter from '@/Shared/SearchFilter.vue';
 import type {
-    AuthDto,
-    FlashDto,
+    InertiaSharedProps,
     Organization,
     PaginatedData,
     SearchFilters,
@@ -109,14 +108,13 @@ import pickBy from 'lodash/pickBy';
 import throttle from 'lodash/throttle';
 import { reactive, watch } from 'vue';
 
-// Define page props (Vue SFC compiler works better with explicit interfaces)
-interface Props {
-    auth: AuthDto;
-    flash: FlashDto;
+// Define page props
+type Props = InertiaSharedProps<{
     filters: SearchFilters;
     organizations: PaginatedData<Organization>;
-}
+}>;
 
+// Important: hand defineProps a **resolved** alias.
 const props = defineProps<Props>();
 
 // Reactive form state

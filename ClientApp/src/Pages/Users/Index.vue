@@ -101,21 +101,20 @@
 import Icon from '@/Shared/Icon.vue';
 import Layout from '@/Shared/Layout.vue';
 import SearchFilter from '@/Shared/SearchFilter.vue';
-import type { AuthDto, FlashDto, User, UserFilters } from '@/Types/generated';
+import type { InertiaSharedProps, User, UserFilters } from '@/Types/generated';
 import { Head, Link, router } from '@inertiajs/vue3';
 import mapValues from 'lodash/mapValues';
 import pickBy from 'lodash/pickBy';
 import throttle from 'lodash/throttle';
 import { reactive, watch } from 'vue';
 
-// Define page props (Vue SFC compiler works better with explicit interfaces)
-interface Props {
-    auth: AuthDto;
-    flash: FlashDto;
+// Define page props
+type Props = InertiaSharedProps<{
     filters: UserFilters;
     users: User[];
-}
+}>;
 
+// Important: hand defineProps a **resolved** alias.
 const props = defineProps<Props>();
 
 // Reactive form state

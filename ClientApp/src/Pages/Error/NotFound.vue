@@ -208,7 +208,7 @@
 <script setup lang="ts">
 import GuestLayout from '@/Shared/GuestLayout.vue';
 import Layout from '@/Shared/Layout.vue';
-import type { AuthDto } from '@/Types/generated';
+import type { InertiaSharedProps } from '@/Types/generated';
 import { Link } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
@@ -216,10 +216,11 @@ import { computed } from 'vue';
 const InertiaLink = Link;
 
 // Define page props
-interface Props {
-    auth?: AuthDto;
-}
+type Props = InertiaSharedProps<{
+    [key: string]: unknown;
+}>;
 
+// Important: hand defineProps a **resolved** alias.
 const props = defineProps<Props>();
 
 // Computed layout

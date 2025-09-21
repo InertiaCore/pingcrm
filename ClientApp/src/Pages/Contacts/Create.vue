@@ -114,7 +114,7 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 // Define page props
 
 type Props = InertiaSharedProps<{
-  organizations: Organization[];
+    organizations: Organization[];
 }>;
 
 // Important: hand defineProps a **resolved** alias.

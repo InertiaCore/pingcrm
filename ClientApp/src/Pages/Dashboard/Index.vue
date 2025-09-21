@@ -20,7 +20,11 @@ import Layout from '@/Shared/Layout.vue';
 import type { InertiaSharedProps } from '@/Types/generated';
 import { Head } from '@inertiajs/vue3';
 
-defineProps<InertiaSharedProps>();
+type Props = InertiaSharedProps<{
+    [key: string]: unknown;
+}>;
+
+defineProps<Props>();
 
 // This component uses Layout as the default layout
 defineOptions({

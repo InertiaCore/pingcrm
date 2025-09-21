@@ -75,15 +75,15 @@ import Layout from '@/Shared/Layout.vue';
 import LoadingButton from '@/Shared/LoadingButton.vue';
 import SelectInput from '@/Shared/SelectInput.vue';
 import TextInput from '@/Shared/TextInput.vue';
-import type { AuthDto, CreateUserForm, FlashDto } from '@/Types/generated';
+import type { CreateUserForm, InertiaSharedProps } from '@/Types/generated';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
-// Define page props (Vue SFC compiler works better with explicit interfaces)
-interface Props {
-    auth: AuthDto;
-    flash: FlashDto;
-}
+// Define page props
+type Props = InertiaSharedProps<{
+    [key: string]: unknown;
+}>;
 
+// Important: hand defineProps a **resolved** alias.
 defineProps<Props>();
 
 const form = useForm<CreateUserForm>({

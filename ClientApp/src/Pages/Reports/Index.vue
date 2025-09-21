@@ -7,15 +7,15 @@
 
 <script setup lang="ts">
 import Layout from '@/Shared/Layout.vue';
-import type { AuthDto, FlashDto } from '@/Types/generated';
+import type { InertiaSharedProps } from '@/Types/generated';
 import { Head } from '@inertiajs/vue3';
 
 // Define page props
-interface Props {
-    auth: AuthDto;
-    flash: FlashDto;
-}
+type Props = InertiaSharedProps<{
+    [key: string]: unknown;
+}>;
 
+// Important: hand defineProps a **resolved** alias.
 defineProps<Props>();
 
 // This component uses Layout as the default layout

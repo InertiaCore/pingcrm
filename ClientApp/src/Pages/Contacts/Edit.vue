@@ -123,22 +123,20 @@ import SelectInput from '@/Shared/SelectInput.vue';
 import TextInput from '@/Shared/TextInput.vue';
 import TrashedMessage from '@/Shared/TrashedMessage.vue';
 import type {
-    AuthDto,
     Contact,
     ContactViewModel,
-    FlashDto,
+    InertiaSharedProps,
     Organization,
 } from '@/Types/generated';
 import { Head, Link, router, useForm } from '@inertiajs/vue3';
 
 // Define page props
-interface Props {
-    auth: AuthDto;
-    flash: FlashDto;
+type Props = InertiaSharedProps<{
     contact: Contact;
     organizations: Organization[];
-}
+}>;
 
+// Important: hand defineProps a **resolved** alias.
 const props = defineProps<Props>();
 
 const form = useForm<ContactViewModel>({

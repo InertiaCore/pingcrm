@@ -105,9 +105,8 @@ import Layout from '@/Shared/Layout.vue';
 import Pagination from '@/Shared/Pagination.vue';
 import SearchFilter from '@/Shared/SearchFilter.vue';
 import type {
-    AuthDto,
     Contact,
-    FlashDto,
+    InertiaSharedProps,
     PaginatedData,
     SearchFilters,
 } from '@/Types/generated';
@@ -118,13 +117,12 @@ import throttle from 'lodash/throttle';
 import { reactive, watch } from 'vue';
 
 // Define page props
-interface Props {
-    auth: AuthDto;
-    flash: FlashDto;
+type Props = InertiaSharedProps<{
     filters: SearchFilters;
     contacts: PaginatedData<Contact>;
-}
+}>;
 
+// Important: hand defineProps a **resolved** alias.
 const props = defineProps<Props>();
 
 // Reactive form state
