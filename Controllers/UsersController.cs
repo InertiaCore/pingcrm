@@ -115,7 +115,7 @@ namespace PingCRM.Controllers
         [HttpPost]
         [Route("users")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Store(UserViewModel model)
+        public async Task<IActionResult> Store([FromBody] UserViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -190,7 +190,7 @@ namespace PingCRM.Controllers
         [HttpPut]
         [Route("users/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int id, UserViewModel model)
+        public async Task<IActionResult> Update(int id, [FromBody] UserViewModel model)
         {
             var user = await _context.Users.FindAsync(id);
 
