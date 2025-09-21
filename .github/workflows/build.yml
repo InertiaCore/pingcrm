@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  DOTNET_VERSION: '8.0.x'
+  NODE_VERSION: '24.x'
+  CI: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,12 +21,12 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "24"
+          node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
           cache-dependency-path: ClientApp/package-lock.json
 
