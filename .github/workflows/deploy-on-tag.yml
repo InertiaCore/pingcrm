@@ -110,7 +110,7 @@ jobs:
       with:
         images: |
           ghcr.io/${{ github.repository }}
-          ${{ secrets.DOCKER_USERNAME != '' && secrets.DOCKER_PASSWORD != '' && format('{0}/pingcrm', secrets.DOCKER_USERNAME) || '' }}
+          ${{ secrets.DOCKER_USERNAME && format('{0}/pingcrm', secrets.DOCKER_USERNAME) || '' }}
         tags: |
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
