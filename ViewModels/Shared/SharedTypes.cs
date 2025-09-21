@@ -125,3 +125,104 @@ public class CreateUserForm
     public bool Owner { get; set; }
     public object? Photo { get; set; } // File input, nullable
 }
+
+/// <summary>
+/// Contact DTO for list views
+/// </summary>
+[ExportTsClass]
+public class ContactDto
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string? Phone { get; set; }
+    public string? City { get; set; }
+    public DateTime? DeletedAt { get; set; }
+    public OrganizationSummaryDto? Organization { get; set; }
+}
+
+/// <summary>
+/// Contact DTO for detail/edit views
+/// </summary>
+[ExportTsClass]
+public class ContactDetailDto
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public int? OrganizationId { get; set; }
+    public string? Email { get; set; }
+    public string? Phone { get; set; }
+    public string? Address { get; set; }
+    public string? City { get; set; }
+    public string? Region { get; set; }
+    public string? Country { get; set; }
+    public string? PostalCode { get; set; }
+    public DateTime? DeletedAt { get; set; }
+}
+
+/// <summary>
+/// Organization DTO for list views
+/// </summary>
+[ExportTsClass]
+public class OrganizationDto
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string? Phone { get; set; }
+    public string? City { get; set; }
+    public DateTime? DeletedAt { get; set; }
+}
+
+/// <summary>
+/// Organization DTO for detail/edit views
+/// </summary>
+[ExportTsClass]
+public class OrganizationDetailDto
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string? Email { get; set; }
+    public string? Phone { get; set; }
+    public string? Address { get; set; }
+    public string? City { get; set; }
+    public string? Region { get; set; }
+    public string? Country { get; set; }
+    public string? PostalCode { get; set; }
+    public DateTime? DeletedAt { get; set; }
+    public List<ContactSummaryDto>? Contacts { get; set; }
+}
+
+/// <summary>
+/// Organization summary for references
+/// </summary>
+[ExportTsClass]
+public class OrganizationSummaryDto
+{
+    public string Name { get; set; } = string.Empty;
+}
+
+/// <summary>
+/// Contact summary for references
+/// </summary>
+[ExportTsClass]
+public class ContactSummaryDto
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string? City { get; set; }
+    public string? Phone { get; set; }
+}
+
+/// <summary>
+/// User DTO for list views
+/// </summary>
+[ExportTsClass]
+public class UserListDto
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public bool Owner { get; set; }
+    public string? Photo { get; set; }
+    public DateTime? DeletedAt { get; set; }
+}

@@ -10,6 +10,9 @@ using PingCRM.Data;
 using PingCRM.Models;
 using PingCRM.ViewModels;
 using PingCRM.Helpers;
+using PingCRM.ViewModels.Shared;
+using PingCRM.Extensions;
+using System.Collections.Generic;
 
 namespace PingCRM.Controllers
 {
@@ -61,20 +64,22 @@ namespace PingCRM.Controllers
                 .OrderBy(o => o.Name)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
-                .Select(o => new
+                .Select(o => new OrganizationDto
                 {
-                    o.Id,
-                    o.Name,
-                    o.Phone,
-                    o.City,
+                    Id = o.Id,
+                    Name = o.Name,
+                    Phone = o.Phone,
+                    City = o.City,
                     DeletedAt = o.DeletedAt
                 })
                 .ToListAsync();
 
+            var paginatedList = new PaginatedList<OrganizationDto>(organizations, total, page, pageSize);
+
             return Inertia.Render("Organizations/Index", new
             {
-                Filters = new { search, trashed },
-                Organizations = new PaginatedList<object>(organizations, total, page, pageSize)
+                Filters = new SearchFilters { Search = search, Trashed = trashed },
+                Organizations = paginatedList.ToPaginatedData()
             });
         }
 
@@ -138,28 +143,29 @@ namespace PingCRM.Controllers
 
             return Inertia.Render("Organizations/Edit", new
             {
-                Organization = new
+                Organization = new OrganizationDetailDto
                 {
-                    organization.Id,
-                    organization.Name,
-                    organization.Email,
-                    organization.Phone,
-                    organization.Address,
-                    organization.City,
-                    organization.Region,
-                    organization.Country,
+                    Id = organization.Id,
+                    Name = organization.Name,
+                    Email = organization.Email,
+                    Phone = organization.Phone,
+                    Address = organization.Address,
+                    City = organization.City,
+                    Region = organization.Region,
+                    Country = organization.Country,
                     PostalCode = organization.PostalCode,
                     DeletedAt = organization.DeletedAt,
                     Contacts = organization.Contacts?
                         .OrderBy(c => c.LastName)
                         .ThenBy(c => c.FirstName)
-                        .Select(c => new
+                        .Select(c => new ContactSummaryDto
                         {
-                            c.Id,
+                            Id = c.Id,
                             Name = c.Name,
-                            c.City,
-                            c.Phone
+                            City = c.City,
+                            Phone = c.Phone
                         })
+                        .ToList()
                 }
             });
         }

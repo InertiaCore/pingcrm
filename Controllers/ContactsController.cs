@@ -10,6 +10,8 @@ using PingCRM.Data;
 using PingCRM.Models;
 using PingCRM.ViewModels;
 using PingCRM.Helpers;
+using PingCRM.ViewModels.Shared;
+using PingCRM.Extensions;
 
 namespace PingCRM.Controllers
 {
@@ -67,21 +69,23 @@ namespace PingCRM.Controllers
                 .ThenBy(c => c.FirstName)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
-                .Select(c => new
+                .Select(c => new ContactDto
                 {
-                    c.Id,
+                    Id = c.Id,
                     Name = c.Name,
-                    c.Phone,
-                    c.City,
+                    Phone = c.Phone,
+                    City = c.City,
                     DeletedAt = c.DeletedAt,
-                    Organization = c.Organization != null ? new { c.Organization.Name } : null
+                    Organization = c.Organization != null ? new OrganizationSummaryDto { Name = c.Organization.Name } : null
                 })
                 .ToListAsync();
 
+            var paginatedList = new PaginatedList<ContactDto>(contacts, total, page, pageSize);
+
             return Inertia.Render("Contacts/Index", new
             {
-                Filters = new { search, trashed },
-                Contacts = new PaginatedList<object>(contacts, total, page, pageSize)
+                Filters = new SearchFilters { Search = search, Trashed = trashed },
+                Contacts = paginatedList.ToPaginatedData()
             });
         }
 
@@ -172,18 +176,18 @@ namespace PingCRM.Controllers
 
             return Inertia.Render("Contacts/Edit", new
             {
-                Contact = new
+                Contact = new ContactDetailDto
                 {
-                    contact.Id,
+                    Id = contact.Id,
                     FirstName = contact.FirstName,
                     LastName = contact.LastName,
                     OrganizationId = contact.OrganizationId,
-                    contact.Email,
-                    contact.Phone,
-                    contact.Address,
-                    contact.City,
-                    contact.Region,
-                    contact.Country,
+                    Email = contact.Email,
+                    Phone = contact.Phone,
+                    Address = contact.Address,
+                    City = contact.City,
+                    Region = contact.Region,
+                    Country = contact.Country,
                     PostalCode = contact.PostalCode,
                     DeletedAt = contact.DeletedAt
                 },

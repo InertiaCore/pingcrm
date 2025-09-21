@@ -11,6 +11,9 @@ using InertiaCore;
 using PingCRM.Data;
 using PingCRM.Models;
 using PingCRM.ViewModels;
+using PingCRM.ViewModels.Shared;
+using PingCRM.Helpers;
+using PingCRM.Extensions;
 
 namespace PingCRM.Controllers
 {
@@ -33,13 +36,15 @@ namespace PingCRM.Controllers
 
         [HttpGet]
         [Route("users")]
-        public async Task<IActionResult> Index(string? search, string? role, string? trashed)
+        public async Task<IActionResult> Index(string? search, string? role, string? trashed, int page = 1)
         {
             var currentUser = await _userManager.GetUserAsync(User);
             if (currentUser?.AccountId == null)
             {
                 return Unauthorized();
             }
+
+            const int pageSize = 10;
 
             var query = _context.Users
                 .Where(u => u.AccountId == currentUser.AccountId);
@@ -74,24 +79,29 @@ namespace PingCRM.Controllers
                 query = query.Where(u => u.DeletedAt == null);
             }
 
+            var total = await query.CountAsync();
             var users = await query
                 .OrderBy(u => u.LastName)
                 .ThenBy(u => u.FirstName)
-                .Select(u => new
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(u => new UserListDto
                 {
-                    u.Id,
+                    Id = u.Id,
                     Name = u.Name,
-                    u.Email,
-                    u.Owner,
+                    Email = u.Email ?? string.Empty,
+                    Owner = u.Owner,
                     Photo = u.PhotoPath != null ? $"/img/{u.PhotoPath}?w=40&h=40&fit=crop" : null,
                     DeletedAt = u.DeletedAt
                 })
                 .ToListAsync();
 
+            var paginatedList = new PaginatedList<UserListDto>(users, total, page, pageSize);
+
             return Inertia.Render("Users/Index", new
             {
-                Filters = new { search, role, trashed },
-                Users = users
+                Filters = new UserFilters { Search = search, Role = role, Trashed = trashed },
+                Users = paginatedList.ToPaginatedData()
             });
         }
 

@@ -29,6 +29,43 @@ export interface AuthDto {
 }
 
 
+// Contact Detail Dto
+export interface ContactDetailDto {
+  id: number;
+  first_name: string;
+  last_name: string;
+  organization_id: number;
+  email: string;
+  phone: string;
+  address: string;
+  city: string;
+  region: string;
+  country: string;
+  postal_code: string;
+  deleted_at: Date;
+}
+
+
+// Contact Dto
+export interface ContactDto {
+  id: number;
+  name: string;
+  phone: string;
+  city: string;
+  deleted_at: Date;
+  organization: OrganizationSummaryDto;
+}
+
+
+// Contact Summary Dto
+export interface ContactSummaryDto {
+  id: number;
+  name: string;
+  city: string;
+  phone: string;
+}
+
+
 // Contact View Model
 export interface ContactViewModel {
   first_name: string;
@@ -111,6 +148,38 @@ export type InertiaSharedProps<T = Record<string, unknown>> = T & {
   flash: FlashDto;
   [key: string]: unknown;
 };
+
+// Organization Detail Dto
+export interface OrganizationDetailDto {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  city: string;
+  region: string;
+  country: string;
+  postal_code: string;
+  deleted_at: Date;
+  contacts: ContactSummaryDto[];
+}
+
+
+// Organization Dto
+export interface OrganizationDto {
+  id: number;
+  name: string;
+  phone: string;
+  city: string;
+  deleted_at: Date;
+}
+
+
+// Organization Summary Dto
+export interface OrganizationSummaryDto {
+  name: string;
+}
+
 
 // Organization View Model
 export interface OrganizationViewModel {
@@ -197,6 +266,17 @@ export interface UserFilters extends SearchFilters {
 }
 
 
+// User List Dto
+export interface UserListDto {
+  id: number;
+  name: string;
+  email: string;
+  owner: boolean;
+  photo: string;
+  deleted_at: Date;
+}
+
+
 // User View Model
 export interface UserViewModel {
   first_name: string;
@@ -220,3 +300,4 @@ export interface User extends IdentityUser<number> {
   account: Account;
   name: string;
 }
+
