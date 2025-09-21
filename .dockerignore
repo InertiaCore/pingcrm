@@ -1,0 +1,64 @@
+# .NET build artifacts
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# Node.js dependencies (will be installed in Docker)
+ClientApp/node_modules/
+# Build artifacts (will be built in Docker)
+# ClientApp/dist/
+# ClientApp/build/
+ClientApp/.nuxt/
+ClientApp/.output/
+
+# Development files
+.vscode/
+.vs/
+*.user
+*.suo
+.idea/
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Package manager files
+package-lock.json
+yarn.lock
+
+# SQLite database files (for development)
+*.db
+*.db-shm
+*.db-wal
+
+# Temporary files
+*.tmp
+*.temp

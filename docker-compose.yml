@@ -1,0 +1,17 @@
+services:
+  pingcrm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8079:8079"
+      - "44379:44379"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8079
+      - Database__Provider=Sqlite
+      - Database__ConnectionStrings__Sqlite=Data Source=/app/data/pingcrm.db
+    volumes:
+      - ./docker/data:/app/data
+      - ./docker/uploads:/app/wwwroot/uploads
+    restart: unless-stopped
