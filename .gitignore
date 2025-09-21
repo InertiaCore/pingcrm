@@ -183,6 +183,7 @@ ClientBin/
 orleans.codegen.cs
 
 node_modules
+docker
 
 # RIA/Silverlight projects
 Generated_Code/
@@ -232,4 +233,10 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
-/*.db*
+
+# docker
+*.db*
+wasm-output/
+
+# TypeGen configuration (one-time use)
+tgconfig.json
