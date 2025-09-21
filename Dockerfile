@@ -12,7 +12,7 @@ COPY ClientApp/ ./
 RUN npm run build
 
 # Stage 2: Build .NET application
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS backend-build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS backend-build
 
 WORKDIR /src
 
