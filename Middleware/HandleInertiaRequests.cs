@@ -20,18 +20,29 @@ public class HandleInertiaRequests
     {
         Inertia.Share("flash", () =>
         {
-            var factory = context.RequestServices.GetRequiredService<ITempDataDictionaryFactory>();
-            var tempData = factory.GetTempData(context);
-            var flash = new Dictionary<string, object>();
-            if (tempData.TryGetValue("error", out var error) && error is not null)
+            try
             {
-                flash.Add("error", error);
+                var factory = context.RequestServices.GetRequiredService<ITempDataDictionaryFactory>();
+                var tempData = factory.GetTempData(context);
+                var flash = new Dictionary<string, object>();
+
+                if (tempData.TryGetValue("error", out var error) && error is not null)
+                {
+                    // Ensure we only store simple serializable types
+                    flash.Add("error", error.ToString() ?? "");
+                }
+                if (tempData.TryGetValue("success", out var success) && success is not null)
+                {
+                    // Ensure we only store simple serializable types
+                    flash.Add("success", success.ToString() ?? "");
+                }
+                return flash;
             }
-            if (tempData.TryGetValue("success", out var success) && success is not null)
+            catch (Exception)
             {
-                flash.Add("success", success);
+                // If there's any issue with TempData, return empty flash to prevent crashes
+                return new Dictionary<string, object>();
             }
-            return flash;
         });
 
         Inertia.Share("auth", () =>
