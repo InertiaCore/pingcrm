@@ -1,15 +1,15 @@
 <template>
-  <button :disabled="loading" class="flex items-center">
-    <div v-if="loading" class="btn-spinner mr-2" />
-    <slot />
-  </button>
+    <button :disabled="loading" class="flex items-center">
+        <div v-if="loading" class="btn-spinner mr-2" />
+        <slot />
+    </button>
 </template>
 
 <script setup lang="ts">
 // Define props with types
 interface Props {
-  loading?: boolean
+    loading?: boolean;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 </script>

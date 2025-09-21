@@ -1,20 +1,29 @@
 <template>
-  <div class="flex items-center justify-between p-4 max-w-3xl bg-yellow-400 rounded">
-    <div class="flex items-center">
-      <icon name="trash" class="shrink-0 mr-2 w-4 h-4 fill-yellow-800" />
-      <div class="text-yellow-800 text-sm font-medium">
-        <slot />
-      </div>
+    <div
+        class="flex max-w-3xl items-center justify-between rounded bg-yellow-400 p-4"
+    >
+        <div class="flex items-center">
+            <icon name="trash" class="mr-2 h-4 w-4 shrink-0 fill-yellow-800" />
+            <div class="text-sm font-medium text-yellow-800">
+                <slot />
+            </div>
+        </div>
+        <button
+            class="text-sm text-yellow-800 hover:underline"
+            tabindex="-1"
+            type="button"
+            @click="$emit('restore')"
+        >
+            Restore
+        </button>
     </div>
-    <button class="text-yellow-800 hover:underline text-sm" tabindex="-1" type="button" @click="$emit('restore')">Restore</button>
-  </div>
 </template>
 
 <script setup lang="ts">
-import Icon from '@/Shared/Icon.vue'
+import Icon from '@/Shared/Icon.vue';
 
 // Define emits
 defineEmits<{
-  'restore': []
-}>()
+    restore: [];
+}>();
 </script>
