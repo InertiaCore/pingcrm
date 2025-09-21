@@ -4,6 +4,8 @@ using PingCRM.Data;
 using PingCRM.Extensions;
 using PingCRM.Middleware;
 using PingCRM.Models;
+using Microsoft.AspNetCore.HttpOverrides;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +40,43 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.ExpireTimeSpan = TimeSpan.FromDays(30);
 });
 
+// https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-9.0
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    var forwardedHeadersConfig = builder.Configuration.GetSection("ForwardedHeaders");
+
+    // Set forwarded headers
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+
+    // Configure forward limit if specified
+    var forwardLimit = forwardedHeadersConfig.GetValue<int?>("ForwardLimit");
+    if (forwardLimit.HasValue)
+    {
+        options.ForwardLimit = forwardLimit.Value;
+    }
+
+    // Configure custom header name if specified
+    var customHeaderName = forwardedHeadersConfig.GetValue<string>("ForwardedForHeaderName");
+    if (!string.IsNullOrEmpty(customHeaderName))
+    {
+        options.ForwardedForHeaderName = customHeaderName;
+    }
+
+    // Add known proxies from configuration
+    var knownProxies = forwardedHeadersConfig.GetSection("KnownProxies").Get<string[]>();
+    if (knownProxies != null)
+    {
+        foreach (var proxy in knownProxies)
+        {
+            if (IPAddress.TryParse(proxy.Trim(), out var ipAddress))
+            {
+                options.KnownProxies.Add(ipAddress);
+            }
+        }
+    }
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews()
     .AddSessionStateTempDataProvider();
@@ -63,6 +102,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
     app.UseHttpsRedirection();
+    app.UseForwardedHeaders();
 }
 
 app.UseStaticFiles();
