@@ -1,7 +1,7 @@
 using InertiaCore.Extensions;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using PingCRM.Data;
+using PingCRM.Extensions;
 using PingCRM.Middleware;
 using PingCRM.Models;
 
@@ -10,9 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Configure logging to suppress HTTPS development certificate warnings
 builder.Logging.AddFilter("Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer", LogLevel.Error);
 
-// Add database context
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Add database services
+builder.Services.AddDatabaseServices(builder.Configuration);
 
 // Add Identity services
 builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
@@ -82,17 +81,6 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 
 // Initialize database
-try
-{
-    using (var scope = app.Services.CreateScope())
-    {
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        context.Database.EnsureCreated();
-    }
-}
-catch (Exception ex)
-{
-    Console.WriteLine($"Database initialization warning: {ex.Message}");
-}
+await app.InitializeDatabaseAsync();
 
 app.Run();
