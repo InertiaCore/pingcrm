@@ -93,7 +93,7 @@ namespace PingCRM.Controllers
         [HttpPost]
         [Route("organizations")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Store(OrganizationViewModel model)
+        public async Task<IActionResult> Store([FromBody] OrganizationViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -173,7 +173,7 @@ namespace PingCRM.Controllers
         [HttpPut]
         [Route("organizations/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int id, OrganizationViewModel model)
+        public async Task<IActionResult> Update(int id, [FromBody] OrganizationViewModel model)
         {
             var organization = await _context.Organizations.FindAsync(id);
 
