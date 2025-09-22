@@ -21,6 +21,9 @@ public static class DatabaseServiceExtensions
             {
                 // Fallback to legacy configuration
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection") ?? "Data Source=Data/pingcrm.db");
+                // Configure warnings for seed data scenarios
+                options.ConfigureWarnings(warnings =>
+                    warnings.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.PendingModelChangesWarning));
                 return;
             }
 
@@ -43,6 +46,10 @@ public static class DatabaseServiceExtensions
                 default:
                     throw new InvalidOperationException($"Unsupported database provider: {databaseOptions.Provider}");
             }
+
+            // Configure warnings for seed data scenarios
+            options.ConfigureWarnings(warnings =>
+                warnings.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.PendingModelChangesWarning));
         });
 
         // Register database initialization service

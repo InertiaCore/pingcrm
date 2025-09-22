@@ -112,8 +112,8 @@ app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseInertia();
-app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<CsrfMiddleware>();
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<HandleInertiaRequests>();
 
 app.MapControllerRoute(

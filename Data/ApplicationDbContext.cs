@@ -89,11 +89,14 @@ namespace PingCRM.Data
 
         private void SeedData(ModelBuilder modelBuilder)
         {
-            var hasher = new PasswordHasher<User>();
-            var now = DateTime.UtcNow;
+            var seedDate = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            // Static password hash for "secret" - pre-generated hash
+            const string staticPasswordHash = "AQAAAAIAAYagAAAAEE5RzHZ+3dQAI1H7sUo0TtR+HJb+yc336uLFL5PcW63/BbGqdE9cNBf1pbjgj5bKow==";
+            // Static security stamp - fixed GUID for seeding
+            const string staticSecurityStamp = "70e9a4fe-5125-413d-bb98-13a1bdd72fe3";
 
             modelBuilder.Entity<Account>().HasData(
-                new Account { Id = 1, Name = "Acme Corporation", CreatedAt = now, UpdatedAt = now }
+                new Account { Id = 1, Name = "Acme Corporation", CreatedAt = seedDate, UpdatedAt = seedDate }
             );
 
             modelBuilder.Entity<User>().HasData(
@@ -108,11 +111,11 @@ namespace PingCRM.Data
                     NormalizedUserName = "JOHNDOE@EXAMPLE.COM",
                     NormalizedEmail = "JOHNDOE@EXAMPLE.COM",
                     EmailConfirmed = true,
-                    PasswordHash = hasher.HashPassword(new User { FirstName = "", LastName = "" }, "secret"),
-                    SecurityStamp = Guid.NewGuid().ToString(),
+                    PasswordHash = staticPasswordHash,
+                    SecurityStamp = staticSecurityStamp,
                     Owner = true,
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 }
             );
 
@@ -130,8 +133,8 @@ namespace PingCRM.Data
                     Region = "CA",
                     Country = "US",
                     PostalCode = "94105",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Organization
                 {
@@ -145,8 +148,8 @@ namespace PingCRM.Data
                     Region = "NY",
                     Country = "US",
                     PostalCode = "10001",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Organization
                 {
@@ -160,8 +163,8 @@ namespace PingCRM.Data
                     Region = "CA",
                     Country = "US",
                     PostalCode = "90210",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Organization
                 {
@@ -175,8 +178,8 @@ namespace PingCRM.Data
                     Region = "IL",
                     Country = "US",
                     PostalCode = "60601",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Organization
                 {
@@ -190,8 +193,8 @@ namespace PingCRM.Data
                     Region = "TX",
                     Country = "US",
                     PostalCode = "73301",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 }
             );
 
@@ -211,8 +214,8 @@ namespace PingCRM.Data
                     Region = "CA",
                     Country = "US",
                     PostalCode = "94105",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -228,8 +231,8 @@ namespace PingCRM.Data
                     Region = "CA",
                     Country = "US",
                     PostalCode = "94105",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -245,8 +248,8 @@ namespace PingCRM.Data
                     Region = "NY",
                     Country = "US",
                     PostalCode = "10001",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -262,8 +265,8 @@ namespace PingCRM.Data
                     Region = "CA",
                     Country = "US",
                     PostalCode = "90210",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -279,8 +282,8 @@ namespace PingCRM.Data
                     Region = "IL",
                     Country = "US",
                     PostalCode = "60601",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -296,8 +299,8 @@ namespace PingCRM.Data
                     Region = "TX",
                     Country = "US",
                     PostalCode = "73301",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -313,8 +316,8 @@ namespace PingCRM.Data
                     Region = "WA",
                     Country = "US",
                     PostalCode = "98101",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -330,8 +333,8 @@ namespace PingCRM.Data
                     Region = "CO",
                     Country = "US",
                     PostalCode = "80201",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -347,8 +350,8 @@ namespace PingCRM.Data
                     Region = "NY",
                     Country = "US",
                     PostalCode = "10001",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -364,8 +367,8 @@ namespace PingCRM.Data
                     Region = "CA",
                     Country = "US",
                     PostalCode = "90210",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -381,8 +384,8 @@ namespace PingCRM.Data
                     Region = "CA",
                     Country = "US",
                     PostalCode = "94105",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -398,8 +401,8 @@ namespace PingCRM.Data
                     Region = "IL",
                     Country = "US",
                     PostalCode = "60601",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -415,8 +418,8 @@ namespace PingCRM.Data
                     Region = "TX",
                     Country = "US",
                     PostalCode = "73301",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -432,8 +435,8 @@ namespace PingCRM.Data
                     Region = "OR",
                     Country = "US",
                     PostalCode = "97201",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -449,8 +452,8 @@ namespace PingCRM.Data
                     Region = "NY",
                     Country = "US",
                     PostalCode = "10001",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -466,8 +469,8 @@ namespace PingCRM.Data
                     Region = "CA",
                     Country = "US",
                     PostalCode = "94105",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -483,8 +486,8 @@ namespace PingCRM.Data
                     Region = "CA",
                     Country = "US",
                     PostalCode = "90210",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -500,8 +503,8 @@ namespace PingCRM.Data
                     Region = "IL",
                     Country = "US",
                     PostalCode = "60601",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -517,8 +520,8 @@ namespace PingCRM.Data
                     Region = "TX",
                     Country = "US",
                     PostalCode = "73301",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -534,8 +537,8 @@ namespace PingCRM.Data
                     Region = "FL",
                     Country = "US",
                     PostalCode = "33101",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -551,8 +554,8 @@ namespace PingCRM.Data
                     Region = "CA",
                     Country = "US",
                     PostalCode = "94105",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -568,8 +571,8 @@ namespace PingCRM.Data
                     Region = "NY",
                     Country = "US",
                     PostalCode = "10001",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -585,8 +588,8 @@ namespace PingCRM.Data
                     Region = "CA",
                     Country = "US",
                     PostalCode = "90210",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -602,8 +605,8 @@ namespace PingCRM.Data
                     Region = "IL",
                     Country = "US",
                     PostalCode = "60601",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -619,8 +622,8 @@ namespace PingCRM.Data
                     Region = "TX",
                     Country = "US",
                     PostalCode = "73301",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -636,8 +639,8 @@ namespace PingCRM.Data
                     Region = "MA",
                     Country = "US",
                     PostalCode = "02101",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -653,8 +656,8 @@ namespace PingCRM.Data
                     Region = "CA",
                     Country = "US",
                     PostalCode = "94105",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -670,8 +673,8 @@ namespace PingCRM.Data
                     Region = "NY",
                     Country = "US",
                     PostalCode = "10001",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -687,8 +690,8 @@ namespace PingCRM.Data
                     Region = "CA",
                     Country = "US",
                     PostalCode = "90210",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 },
                 new Contact
                 {
@@ -704,8 +707,8 @@ namespace PingCRM.Data
                     Region = "IL",
                     Country = "US",
                     PostalCode = "60601",
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    CreatedAt = seedDate,
+                    UpdatedAt = seedDate
                 }
             );
         }

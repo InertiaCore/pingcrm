@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PingCRM.Data;
 
@@ -10,9 +11,11 @@ using PingCRM.Data;
 namespace PingCRM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250921230502_FixSeedDataStaticDates")]
+    partial class FixSeedDataStaticDates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.9");
@@ -990,7 +993,7 @@ namespace PingCRM.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             AccountId = 1,
-                            ConcurrencyStamp = "3c30612e-c353-44c1-a4c3-400e348f573b",
+                            ConcurrencyStamp = "b39e5818-2933-4f58-81e6-43454c8ace18",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Email = "johndoe@example.com",
                             EmailConfirmed = true,
@@ -1000,9 +1003,9 @@ namespace PingCRM.Migrations
                             NormalizedEmail = "JOHNDOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE@EXAMPLE.COM",
                             Owner = true,
-                            PasswordHash = "AQAAAAIAAYagAAAAEE5RzHZ+3dQAI1H7sUo0TtR+HJb+yc336uLFL5PcW63/BbGqdE9cNBf1pbjgj5bKow==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE+mu9jINv0N6nD2FpcBHSgO5qHRTqk2cGmXczwk/o60s0eNOaReww+mkt7Hn1E8Og==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "70e9a4fe-5125-413d-bb98-13a1bdd72fe3",
+                            SecurityStamp = "e720693a-a522-46e5-b9ed-4260d75432cb",
                             TwoFactorEnabled = false,
                             UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             UserName = "johndoe@example.com"
