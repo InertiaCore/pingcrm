@@ -1,28 +1,21 @@
-import inertiacore from '@inertiacore/vite-plugin';
-import tailwindcss from '@tailwindcss/vite';
-import vue from '@vitejs/plugin-vue';
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import inertiacore from "@inertiacore/vite-plugin";
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
     plugins: [
         tailwindcss(),
         inertiacore({
-            input: ['src/app.ts'],
-            ssr: 'src/ssr.ts',
+            input: ["src/App.tsx"],
+            ssr: "src/ssr.tsx",
             refresh: true,
         }),
-        vue({
-            template: {
-                transformAssetUrls: {
-                    base: null,
-                    includeAbsolute: false,
-                },
-            },
-        }),
+        react(),
     ],
     resolve: {
         alias: {
-            '@': '/src',
+            "@": "/src",
         },
     },
     build: {

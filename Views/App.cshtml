@@ -2,7 +2,7 @@
 @using InertiaCore.Utils
 
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-gray-100">
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -11,9 +11,10 @@
     @await Inertia.Head(Model)
 </head>
 
-<body class="font-sans leading-none text-gray-700 antialiased">
+<body>
+    @Vite.ReactRefresh()
     @await Inertia.Html(Model)
-    @Vite.Input("src/app.ts")
+    @Vite.Input("src/App.tsx")
 </body>
 
 </html>
