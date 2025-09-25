@@ -49,6 +49,12 @@ public class ExceptionMiddleware
             throw exception;
         }
 
+        // In development, let the exception bubble up for normal .NET error handling
+        if (_env.IsDevelopment())
+        {
+            throw exception;
+        }
+
         context.Response.StatusCode = 500;
 
         // Clear any existing TempData to prevent serialization issues
@@ -59,12 +65,14 @@ public class ExceptionMiddleware
             tempData.Clear();
         }
 
+        var isDevelopment = _env.IsDevelopment();
+
         var errorData = new
         {
-            message = _env.IsDevelopment()
+            message = isDevelopment
                 ? exception.Message
                 : "An unexpected error occurred. Please try again later.",
-            stackTrace = _env.IsDevelopment() ? exception.StackTrace : null
+            stackTrace = isDevelopment ? exception.StackTrace : null
         };
 
         var result = Inertia.Render("Error/ServerError", errorData);

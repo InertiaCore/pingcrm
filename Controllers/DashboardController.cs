@@ -14,5 +14,12 @@ namespace PingCRM.Controllers
         {
             return Inertia.Render("Dashboard/Index");
         }
+
+        [HttpGet]
+        [Route("500")]
+        public IActionResult ThrowException()
+        {
+            throw new Exception("Test exception for 500 error page");
+        }
     }
 }
