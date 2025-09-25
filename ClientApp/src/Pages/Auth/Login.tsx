@@ -2,7 +2,7 @@ import LoadingButton from '@/Components/Button/LoadingButton';
 import { CheckboxInput } from '@/Components/Form/CheckboxInput';
 import FieldGroup from '@/Components/Form/FieldGroup';
 import TextInput from '@/Components/Form/TextInput';
-import Logo from '@/Components/Logo/Logo';
+import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, useForm } from '@inertiajs/react';
 import React from 'react';
 
@@ -20,32 +20,32 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-indigo-900 p-6">
+        <GuestLayout>
             <Head title="Login" />
 
-            <div className="w-full max-w-md">
-                <Logo
-                    className="mx-auto block w-full max-w-xs fill-current text-white"
-                    height={50}
-                />
-                <form
-                    onSubmit={handleSubmit}
-                    className="mt-8 overflow-hidden rounded-lg bg-white shadow-xl"
-                >
-                    <div className="px-10 py-12">
-                        <h1 className="text-center text-3xl font-bold">
-                            Welcome Back!
-                        </h1>
-                        <div className="mx-auto mt-6 w-24 border-b-2" />
-                        <div className="grid gap-6">
+            <div className="card shadow-xl">
+                <form onSubmit={handleSubmit}>
+                    <div className="card-body space-y-6">
+                        <div className="text-center">
+                            <h1 className="text-2xl font-bold text-gray-900">
+                                Welcome Back!
+                            </h1>
+                            <p className="mt-2 text-sm text-gray-600">
+                                Sign in to your account to continue
+                            </p>
+                        </div>
+
+                        <div className="space-y-4">
                             <FieldGroup
-                                label="Email"
+                                label="Email Address"
                                 name="email"
                                 error={errors.email}
                             >
                                 <TextInput
                                     name="email"
                                     type="email"
+                                    autoComplete="email"
+                                    placeholder="Enter your email"
                                     error={errors.email}
                                     value={data.email}
                                     onChange={(e) =>
@@ -60,7 +60,10 @@ export default function LoginPage() {
                                 error={errors.password}
                             >
                                 <TextInput
+                                    name="password"
                                     type="password"
+                                    autoComplete="current-password"
+                                    placeholder="Enter your password"
                                     error={errors.password}
                                     value={data.password}
                                     onChange={(e) =>
@@ -71,7 +74,7 @@ export default function LoginPage() {
 
                             <FieldGroup>
                                 <CheckboxInput
-                                    label="Remember Me"
+                                    label="Remember me"
                                     name="remember"
                                     id="remember"
                                     checked={data.remember}
@@ -82,24 +85,25 @@ export default function LoginPage() {
                             </FieldGroup>
                         </div>
                     </div>
-                    <div className="flex items-center justify-between border-t border-gray-200 bg-gray-100 px-10 py-4">
+
+                    <div className="card-footer flex items-center justify-between">
                         <a
-                            className="hover:underline"
+                            className="btn-link text-sm"
                             tabIndex={-1}
                             href="#reset-password"
                         >
-                            Forgot password?
+                            Forgot your password?
                         </a>
                         <LoadingButton
                             type="submit"
                             loading={processing}
                             className="btn-indigo"
                         >
-                            Login
+                            Sign In
                         </LoadingButton>
                     </div>
                 </form>
             </div>
-        </div>
+        </GuestLayout>
     );
 }

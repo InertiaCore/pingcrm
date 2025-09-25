@@ -2,6 +2,7 @@ interface FieldGroupProps {
     name?: string;
     label?: string;
     error?: string;
+    helpText?: string;
     children: React.ReactNode;
 }
 
@@ -9,20 +10,19 @@ export default function FieldGroup({
     label,
     name,
     error,
+    helpText,
     children,
 }: FieldGroupProps) {
     return (
-        <div className="space-y-2">
+        <div className="form-group">
             {label && (
-                <label
-                    className="block text-gray-800 select-none"
-                    htmlFor={name}
-                >
-                    {label}:
+                <label className="form-label" htmlFor={name}>
+                    {label}
                 </label>
             )}
             {children}
-            {error && <div className="mt-2 text-sm text-red-500">{error}</div>}
+            {helpText && <div className="form-help">{helpText}</div>}
+            {error && <div className="form-error">{error}</div>}
         </div>
     );
 }

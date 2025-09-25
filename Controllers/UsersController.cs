@@ -101,7 +101,7 @@ namespace PingCRM.Controllers
             return Inertia.Render("Users/Index", new
             {
                 Filters = new UserFilters { Search = search, Role = role, Trashed = trashed },
-                Users = paginatedList.ToPaginatedData()
+                Users = new Func<object>(() => paginatedList.ToPaginatedData()),
             });
         }
 

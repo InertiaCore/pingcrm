@@ -1,14 +1,18 @@
 import { ComponentProps } from 'react';
+import cx from 'classnames';
 
 interface SelectInputProps extends ComponentProps<'select'> {
     error?: string;
     options: { value: string; label: string }[];
+    placeholder?: string;
 }
 
 export default function SelectInput({
     name,
     error,
     options = [],
+    placeholder,
+    className,
     ...props
 }: SelectInputProps) {
     return (
@@ -16,12 +20,14 @@ export default function SelectInput({
             id={name}
             name={name}
             {...props}
-            className={`form-select w-full rounded border-gray-300 focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 focus:outline-none ${
-                error
-                    ? 'border-red-400 focus:border-red-400 focus:ring-red-400'
-                    : ''
-            }`}
+            aria-invalid={!!error}
+            className={cx('form-select', className)}
         >
+            {placeholder && (
+                <option value="" disabled>
+                    {placeholder}
+                </option>
+            )}
             {options?.map(({ value, label }, index) => (
                 <option key={index} value={value}>
                     {label}

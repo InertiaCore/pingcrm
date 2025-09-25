@@ -1,20 +1,26 @@
 import { ComponentProps } from 'react';
+import cx from 'classnames';
 
 interface CheckboxInputProps extends ComponentProps<'input'> {
     label?: string;
 }
 
-export function CheckboxInput({ label, name, ...props }: CheckboxInputProps) {
+export function CheckboxInput({
+    label,
+    name,
+    className,
+    ...props
+}: CheckboxInputProps) {
     return (
-        <label className="flex items-center select-none" htmlFor={name}>
+        <label className="flex items-center select-none cursor-pointer" htmlFor={name}>
             <input
                 id={name}
                 name={name}
                 type="checkbox"
-                className="form-checkbox mr-2 rounded text-indigo-600 focus:ring-indigo-600"
+                className={cx('form-checkbox mr-2', className)}
                 {...props}
             />
-            <span className="text-sm">{label}</span>
+            <span className="text-sm text-gray-700">{label}</span>
         </label>
     );
 }

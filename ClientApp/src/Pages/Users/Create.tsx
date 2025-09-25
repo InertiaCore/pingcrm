@@ -35,9 +35,10 @@ const Create = () => {
                     Create
                 </h1>
             </div>
-            <div className="max-w-3xl overflow-hidden rounded bg-white shadow">
+            <div className="card max-w-3xl">
                 <form onSubmit={handleSubmit}>
-                    <div className="grid gap-8 p-8 lg:grid-cols-2">
+                    <div className="card-body">
+                        <div className="grid gap-6 lg:grid-cols-2">
                         <FieldGroup
                             label="First Name"
                             name="first_name"
@@ -134,8 +135,9 @@ const Create = () => {
                                 }
                             />
                         </FieldGroup>
+                        </div>
                     </div>
-                    <div className="flex items-center justify-end border-t border-gray-200 bg-gray-100 px-8 py-4">
+                    <div className="card-footer flex items-center justify-end">
                         <LoadingButton
                             loading={processing}
                             type="submit"

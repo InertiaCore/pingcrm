@@ -12,7 +12,7 @@ export default function LoadingButton({
     ...props
 }: LoadingButtonProps) {
     const classNames = cx(
-        'flex items-center',
+        'flex items-center cursor-pointer',
         'focus:outline-none',
         {
             'pointer-events-none bg-opacity-75 select-none': loading,
